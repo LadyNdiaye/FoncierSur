@@ -1,0 +1,23 @@
+{
+  "name": "parcelle-chaincode",
+  "version": "1.0.0",
+  "description": "Chaincode FoncierSur - gestion des preuves de parcelles",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "prepublishOnly": "npm run build",
+    "start": "fabric-chaincode-node start"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "fabric-contract-api": "^2.5.4",
+    "fabric-shim": "^2.5.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^18.19.0"
+  }
+}

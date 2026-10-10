@@ -1,0 +1,15 @@
+{
+  "name": "fonciersur-backend",
+  "version": "1.0.0",
+  "description": "Backend FoncierSur - API + intégration Hyperledger Fabric",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test:blockchain": "node scripts/test-blockchain.js"
+  },
+  "dependencies": {
+    "@hyperledger/fabric-gateway": "^1.4.0",
+    "@grpc/grpc-js": "^1.9.0",
+    "dotenv": "^16.4.0"
+  }
+}

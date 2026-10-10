@@ -1,0 +1,29 @@
+# Dépendances Node.js (trop lourdes pour Git)
+node_modules/
+
+# Fichier de variables d'environnement locales (contient vos mots de passe secrets)
+.env
+
+# Fichiers de logs et temporaires
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+# Réseau Fabric — matériel cryptographique et données générées (jamais versionnés)
+blockchain/fabric-network/test-network/organizations/
+blockchain/fabric-network/test-network/channel-artifacts/
+blockchain/fabric-network/test-network/system-genesis-block/
+blockchain/fabric-network/test-network/*.tar.gz
+blockchain/fabric-network/bin/
+blockchain/fabric-network/config/
+
+# Build TypeScript du chaincode
+blockchain/chaincode/parcelle/dist/
+
+# Fichiers macOS/Windows
+Thumbs.db
+
+# fabric-samples : on ne garde que test-network et le script d'installation
+blockchain/fabric-network/*
+!blockchain/fabric-network/test-network/
+!blockchain/fabric-network/install-fabric.sh

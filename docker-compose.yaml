@@ -1,0 +1,84 @@
+version: '3.8'
+
+networks:
+  fonciersur-network:
+    external: true
+    name: fonciersur-network
+
+volumes:
+  postgres_data:
+
+services:
+  
+  # 1. BASE DE DONNÉES SPATIALE (PostgreSQL + PostGIS)
+  
+  postgres-postgis:
+    image: postgis/postgis:15-3.3
+    container_name: fonciersur-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-fonciersur_db}
+      POSTGRES_USER: ${POSTGRES_USER:-fonciersur_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-fonciersur_pass}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - fonciersur-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-fonciersur_user} -d ${POSTGRES_DB:-fonciersur_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  
+  # 2. APPLICATION BACKEND (API Express / Node.js)
+  
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fonciersur-backend
+    restart: always
+    environment:
+      - PORT=5000
+      - NODE_ENV=development
+      - DB_HOST=postgres-postgis
+      - DB_PORT=5432
+      - DB_NAME=${POSTGRES_DB:-fonciersur_db}
+      - DB_USER=${POSTGRES_USER:-fonciersur_user}
+      - DB_PASSWORD=${POSTGRES_PASSWORD:-fonciersur_pass}
+      - USE_MOCK_BLOCKCHAIN=${USE_MOCK_BLOCKCHAIN:-false}
+      - FABRIC_CHANNEL_NAME=fonciersur-channel
+      - FABRIC_CHAINCODE_NAME=parcelle
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - ./blockchain/network/crypto-config:/app/crypto-config
+    depends_on:
+      postgres-postgis:
+        condition: service_healthy
+    networks:
+      - fonciersur-network
+
+  
+  # 3. APPLICATION FRONTEND (React)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: fonciersur-frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+    depends_on:
+      - backend
+    networks:
+      - fonciersur-network
