@@ -90,7 +90,7 @@ cd blockchain/fabric-network/test-network
 ### 3. Déployer le chaincode
 
 ```bash
-./network.sh deployCC -ccn parcelle -ccp ../../chaincode/parcelle -ccl typescript -c fonciersur-channel -ccv 1.3 -ccs 5
+./network.sh deployCC -ccn parcelle -ccp ../../chaincode/parcelle -ccl typescript -c fonciersur-channel -ccv 1.0 -ccs 1
 ```
 
 > Le script `deployCC` installe et approuve automatiquement pour Org1 et Org2 seulement. Voir la section [Réseau blockchain — commandes détaillées](#-réseau-blockchain--commandes-détaillées) plus bas pour l'installation manuelle sur Org3 (Notaire).
@@ -183,8 +183,8 @@ peer lifecycle chaincode install parcelle.tar.gz
 peer lifecycle chaincode approveformyorg \
   -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com \
   --tls --cafile "$ORDERER_CA" \
-  --channelID fonciersur-channel --name parcelle --version 1.3 \
-  --package-id <PACKAGE_ID> --sequence 5
+  --channelID fonciersur-channel --name parcelle --version 1.0 \
+  --package-id <PACKAGE_ID> --sequence 1
 
 peer lifecycle chaincode querycommitted --channelID fonciersur-channel --name parcelle
 ```
