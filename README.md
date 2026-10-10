@@ -239,3 +239,17 @@ cd blockchain/fabric-network/test-network
 | Mame Ndiaya Gaye | Géospatial — PostGIS, gestion documentaire, Espace Promoteur |
 
 Projet réalisé dans le cadre du Projet de Fin de Formation (PFF), ISEP Diamniadio.
+
+---
+
+## 🧪 Tests
+
+Avec le réseau Fabric actif (`./start-dev.sh`) :
+
+```bash
+cd backend
+npm install
+npm test
+```
+
+Les 8 tests vérifient le workflow complet (soumission, validation Cadastre, certification Notaire), l'historique immuable, l'intégrité du hash, la sécurité par organisation et les règles de transition.
