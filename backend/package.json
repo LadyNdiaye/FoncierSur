@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/server.js",
     "test:blockchain": "node scripts/test-blockchain.js",
-    "test": "node --test test/"
+    "test": "node --test test/retry.test.js",
+    "test:fabric": "node --test test/blockchain.test.js"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.9.0",

@@ -6,8 +6,8 @@ const crypto = require('crypto');
 require('dotenv').config();
 
 const NETWORK_PATH = process.env.FABRIC_NETWORK_PATH;
-const CHANNEL_NAME = process.env.FABRIC_CHANNEL_NAME || 'fonciersur-channel';
-const CHAINCODE_NAME = process.env.FABRIC_CHAINCODE_NAME || 'parcelle';
+const CHANNEL_NAME = process.env.FABRIC_CHANNEL || process.env.FABRIC_CHANNEL_NAME || 'fonciersur-channel';
+const CHAINCODE_NAME = process.env.FABRIC_CHAINCODE || process.env.FABRIC_CHAINCODE_NAME || 'parcelle';
 
 // Mapping rôle métier -> organisation Fabric
 const ORG_CONFIG = {
