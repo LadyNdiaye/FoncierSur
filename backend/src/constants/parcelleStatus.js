@@ -1,0 +1,10 @@
+const PARCEL_STATUSES = Object.freeze([
+  'BROUILLON',
+  'SOUMISE',
+  'VALIDE_CADASTRE',
+  'REJETE_CADASTRE',
+  'CERTIFIEE',
+  'REJETE_NOTAIRE',
+]);
+
+module.exports = { PARCEL_STATUSES };

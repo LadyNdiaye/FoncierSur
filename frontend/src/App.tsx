@@ -1,53 +1,52 @@
-import { useState } from 'react';
-import Dashboard from './pages/Notaire/Dashboard';
-import CertifierParcelle from './pages/Notaire/CertifierParcelle';
-import Archive from './pages/Notaire/Archive';
-import './pages/Notaire/notaire.css';
+// App.tsx fusionné (backend/frontend monolithe FoncierSûr).
+// Routage global : authentification (Carla), Cadastre (Carla), Notaire
+// (Lady, via NotaireApp), Promoteur (Mame Ndiaya), preuve blockchain
+// publique (Carla).
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 
-type Screen =
-    | { name: 'dashboard' }
-    | { name: 'certifier'; parcelId: string; reference: string }
-    | { name: 'archive'; parcelId: string; reference: string };
+// Espace Cadastre (Carla Diatta)
+import CadastreDashboard from './pages/Cadastre/Dashboard';
+import ValiderParcelle from './pages/Cadastre/ValiderParcelle';
+import CadastreHistorique from './pages/Cadastre/Historique';
 
-function App() {
-    const [stack, setStack] = useState<Screen[]>([{ name: 'dashboard' }]);
-    const current = stack[stack.length - 1];
+// Espace Promoteur (Mame Ndiaya Gaye)
+import PromoteurDashboard from './pages/Promoteur/Dashboard';
+import CreateParcelle from './pages/Promoteur/CreateParcelle';
+import ParcelleDetail from './pages/Promoteur/ParcelleDetail';
 
-    function push(screen: Screen) {
-        setStack((s) => [...s, screen]);
-    }
+// Espace Notaire (Lady Ndiaye)
+import NotaireApp from './pages/Notaire/NotaireApp';
 
-    function back() {
-        setStack((s) => (s.length > 1 ? s.slice(0, -1) : s));
-    }
+// Public / Blockchain
+import BlockchainProof from './pages/BlockchainProof';
 
-    function resetToDashboard() {
-        setStack([{ name: 'dashboard' }]);
-    }
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Authentification & Public */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/blockchain-proof" element={<BlockchainProof />} />
 
-    return (
-        <div className="app-shell">
-            {current.name === 'dashboard' && (
-                <Dashboard
-                    onOpenParcelle={(parcelId, reference) => push({ name: 'certifier', parcelId, reference })}
-                    onViewHistory={(parcelId, reference) => push({ name: 'archive', parcelId, reference })}
-                />
-            )}
+        {/* Espace Cadastre */}
+        <Route path="/cadastre" element={<CadastreDashboard />} />
+        <Route path="/cadastre/valider/:id" element={<ValiderParcelle />} />
+        <Route path="/cadastre/historique" element={<CadastreHistorique />} />
 
-            {current.name === 'certifier' && (
-                <CertifierParcelle
-                    parcelId={current.parcelId}
-                    onBack={back}
-                    onCertified={resetToDashboard}
-                    onViewHistory={(parcelId, reference) => push({ name: 'archive', parcelId, reference })}
-                />
-            )}
+        {/* Espace Promoteur */}
+        <Route path="/promoteur" element={<PromoteurDashboard />} />
+        <Route path="/promoteur/parcelles/nouvelle" element={<CreateParcelle />} />
+        <Route path="/promoteur/parcelles/:id" element={<ParcelleDetail />} />
 
-            {current.name === 'archive' && (
-                <Archive parcelId={current.parcelId} reference={current.reference} onBack={back} />
-            )}
-        </div>
-    );
+        {/* Espace Notaire (sous-routes gérées par NotaireApp) */}
+        <Route path="/notaire/*" element={<NotaireApp />} />
+
+        {/* Redirection par défaut */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App;

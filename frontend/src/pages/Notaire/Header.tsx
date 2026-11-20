@@ -1,16 +1,28 @@
 interface HeaderProps {
-    title: string;
-    subtitle?: string;
+    actif?: 'dossiers' | 'archive';
+    onDashboard: () => void;
+    onArchive: () => void;
+    onLogout: () => void;
 }
 
-export default function Header({ title, subtitle }: HeaderProps) {
+/** En-tête commun de l'Espace Notaire (maquette : bande prune, badge de rôle, navigation) */
+export default function Header({ actif, onDashboard, onArchive, onLogout }: HeaderProps) {
+    const lien = (cle: 'dossiers' | 'archive', texte: string, action: () => void) => (
+        <button type="button" className={`nt-link ${actif === cle ? 'is-active' : ''}`} onClick={action}>
+            {texte}
+        </button>
+    );
     return (
-        <header className="notaire-header">
-            <div>
-                <h1>{title}</h1>
-                {subtitle && <p>{subtitle}</p>}
+        <header className="nt-header">
+            <div className="nt-brand">
+                <span className="nt-logo">FoncierSûr</span>
+                <span className="nt-role">Espace Notaire</span>
             </div>
-            <span className="badge">🖋️ Espace Notaire</span>
+            <nav className="nt-nav">
+                {lien('dossiers', 'Dossiers à certifier', onDashboard)}
+                {lien('archive', 'Preuve blockchain', onArchive)}
+                <button type="button" className="nt-link" onClick={onLogout}>Déconnexion</button>
+            </nav>
         </header>
     );
 }

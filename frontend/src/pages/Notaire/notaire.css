@@ -1,315 +1,132 @@
-:root {
-    --primary: #4f46e5;
-    --primary-light: #eef2ff;
-    --primary-dark: #3730a3;
-    --success: #16a34a;
-    --danger: #dc2626;
-    --warning-bg: #fef3c7;
-    --warning-text: #92400e;
-    --text: #1f2937;
-    --text-muted: #6b7280;
-    --border: #e5e7eb;
-    --surface: #ffffff;
-    --bg: #f9fafb;
-    --radius: 10px;
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-}
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-* {
-    box-sizing: border-box;
-}
-
-body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    margin: 0;
-}
+/* Espace Notaire : palette « Terre et Ardoise » de la maquette (accent prune pour le Notaire) */
+body { display: block; margin: 0; }
+#root { width: 100%; max-width: none; margin: 0; padding: 0; text-align: left; }
 
 .app-shell {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 32px 24px;
+    --nt-bg: #FAF8F5; --nt-card: #FFFFFF; --nt-bd: #E7E2DA; --nt-ink: #1C1917; --nt-mu: #6B645E;
+    --nt-accent: #5B3A7A; --nt-accent-dark: #4A2F65; --nt-ok: #15803D; --nt-ko: #B91C1C;
+    min-height: 100vh; background: var(--nt-bg); color: var(--nt-ink);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.5;
 }
+.app-shell *, .app-shell *::before, .app-shell *::after { box-sizing: border-box; }
+.app-shell button { font-family: inherit; }
+.app-shell :focus-visible { outline: 3px solid var(--nt-accent); outline-offset: 2px; }
 
-/* Header */
-.notaire-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 28px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
+/* En-tête */
+.nt-header {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 0 32px; background: #fff; border-top: 4px solid var(--nt-accent); border-bottom: 1px solid var(--nt-bd);
 }
-
-.notaire-header h1 {
-    margin: 0;
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.3;
+.nt-brand { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+.nt-logo { font-size: 18px; font-weight: 800; }
+.nt-role { background: rgba(91, 58, 122, .1); color: var(--nt-accent); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+.nt-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
+.nt-link {
+    background: none; border: 0; border-bottom: 2px solid transparent; padding: 14px 2px; cursor: pointer;
+    font-size: 14px; font-weight: 600; color: var(--nt-mu);
 }
+.nt-link:hover { color: var(--nt-ink); }
+.nt-link.is-active { color: var(--nt-ink); border-bottom-color: var(--nt-accent); }
 
-.notaire-header p {
-    margin: 6px 0 0;
-    color: var(--text-muted);
-    font-size: 14px;
-    max-width: 520px;
+/* Mise en page */
+.nt-main { max-width: 1200px; margin: 0 auto; padding: 32px; }
+.nt-main.nt-narrow { max-width: 1000px; }
+.nt-main.nt-medium { max-width: 900px; }
+.nt-title-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+.nt-h1 { margin: 0 0 4px; font-size: 28px; font-weight: 800; }
+.nt-h2 { margin: 0 0 12px; font-size: 16px; font-weight: 700; }
+.nt-h2.nt-flat { margin: 0; font-size: 18px; font-weight: 800; }
+.nt-sub { margin: 0 0 24px; color: var(--nt-mu); font-size: 15px; }
+.nt-sub.nt-tight { margin: 0 0 12px; }
+.nt-muted { color: var(--nt-mu); font-size: 14px; }
+.nt-muted-s { color: var(--nt-mu); font-size: 13px; }
+.nt-hint { margin: 12px 0 0; color: var(--nt-mu); font-size: 13px; }
+.nt-strong { font-weight: 700; }
+.nt-nowrap { white-space: nowrap; }
+
+.nt-card { background: var(--nt-card); border: 1px solid var(--nt-bd); border-radius: 14px; padding: 24px; }
+.nt-section { margin-top: 20px; }
+
+/* Compteurs */
+.nt-stats { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+.nt-stat { flex: 1 1 200px; padding: 20px; }
+.nt-stat-label { font-size: 13px; font-weight: 600; color: var(--nt-mu); }
+.nt-stat-value { font-size: 32px; font-weight: 800; }
+
+/* Tableau */
+.nt-table-wrap { padding: 0; overflow-x: auto; }
+.nt-table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 14px; }
+.nt-table th { text-align: left; padding: 14px 20px; font-weight: 600; color: var(--nt-mu); background: var(--nt-bg); }
+.nt-table td { padding: 16px 20px; border-top: 1px solid var(--nt-bd); }
+.nt-actions { text-align: right; white-space: nowrap; }
+.nt-empty { text-align: center; color: var(--nt-mu); padding: 40px 20px !important; }
+
+/* Pastilles de statut */
+.nt-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.nt-pill-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+/* Boutons */
+.nt-btn {
+    height: 46px; padding: 0 22px; border-radius: 10px; border: 2px solid var(--nt-ink); background: #fff; color: var(--nt-ink);
+    font-size: 15px; font-weight: 700; cursor: pointer;
 }
+.nt-btn:disabled { opacity: .6; cursor: not-allowed; }
+.nt-btn-primary { background: var(--nt-accent); border-color: var(--nt-accent); color: #fff; }
+.nt-btn-primary:hover { background: var(--nt-accent-dark); }
+.nt-btn-ok { background: var(--nt-ok); border-color: var(--nt-ok); color: #fff; }
+.nt-btn-ok:hover { background: #166534; }
+.nt-btn-ko { border-color: var(--nt-ko); color: var(--nt-ko); }
+.nt-btn-ko:hover { background: #FEF2F2; }
+.nt-btn-link { background: none; border: 0; padding: 10px 6px; cursor: pointer; font-size: 14px; font-weight: 700; color: var(--nt-accent); }
+.nt-btn-link:hover { text-decoration: underline; }
+.nt-btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.nt-btn-row.nt-end { justify-content: flex-end; }
 
-.badge {
-    flex-shrink: 0;
-    padding: 6px 14px;
-    border-radius: 999px;
-    background: var(--primary-light);
-    color: var(--primary-dark);
-    font-size: 13px;
-    font-weight: 600;
-    white-space: nowrap;
-}
+/* Messages */
+.nt-alert { margin: 12px 0; padding: 12px 16px; border-radius: 12px; font-size: 14px; font-weight: 700; border: 1px solid; }
+.nt-alert-ok { background: #F0FDF4; border-color: #BBF7D0; color: #166534; }
+.nt-alert-ko { background: #FEF2F2; border-color: #FCA5A5; color: #991B1B; }
+.nt-alert-warn { background: #FFFBEB; border-color: #FCD34D; color: #92400E; }
 
-/* Buttons */
-button {
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 9px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text);
-    transition: background 0.15s, border-color 0.15s;
-}
+/* Fiche dossier */
+.nt-dl { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px 24px; font-size: 14px; }
+.nt-dl dt { color: var(--nt-mu); }
+.nt-dl dd { margin: 2px 0 0; font-weight: 700; }
+.nt-label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 600; }
+.nt-textarea { width: 100%; padding: 12px; border: 1px solid #CFC8BC; border-radius: 10px; font-family: inherit; font-size: 15px; resize: vertical; }
+.nt-hash-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+.nt-hash-row > div { flex: 1 1 280px; min-width: 0; }
+.nt-hash-label { margin-bottom: 6px; font-size: 13px; color: var(--nt-mu); }
+.nt-hash { padding: 12px; border-radius: 10px; background: #F5F1EA; font-family: ui-monospace, monospace; font-size: 12px; word-break: break-all; }
+.nt-hash.is-ko { background: #FEF2F2; color: #991B1B; }
 
-button:hover:not(:disabled) {
-    background: #f3f4f6;
-    border-color: #d1d5db;
-}
+/* Fenêtre de confirmation */
+.nt-overlay { position: fixed; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(0, 0, 0, .4); }
+.nt-modal { width: 100%; max-width: 440px; padding: 24px; background: #fff; border-radius: 16px; box-shadow: 0 8px 24px rgba(28, 25, 23, .18); }
+.nt-modal .nt-h2 { font-size: 20px; font-weight: 800; }
 
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
+/* Preuve blockchain */
+.nt-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.nt-chip { height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid #CFC8BC; background: #fff; color: var(--nt-ink); font-size: 14px; font-weight: 700; cursor: pointer; }
+.nt-chip:hover { border-color: var(--nt-ink); }
+.nt-chip.is-active { background: var(--nt-ink); border-color: var(--nt-ink); color: #fff; }
+.nt-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 16px; }
+.nt-ok-text { color: #166534; font-size: 14px; font-weight: 600; }
+.nt-ko-text { color: #991B1B; font-size: 14px; font-weight: 700; }
+.nt-timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.nt-event { display: flex; gap: 16px; }
+.nt-rail { display: flex; flex-direction: column; align-items: center; }
+.nt-dot { width: 14px; height: 14px; margin-top: 22px; border-radius: 50%; }
+.nt-line { flex: 1; width: 2px; background: var(--nt-bd); }
+.nt-event:last-child .nt-line { display: none; }
+.nt-event-card { flex: 1; margin-bottom: 16px; padding: 16px 20px; }
+.nt-event-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+.nt-event-comment { margin-top: 8px; font-size: 14px; }
+.nt-mono { margin-top: 6px; font-family: ui-monospace, monospace; font-size: 12px; color: var(--nt-mu); word-break: break-all; }
 
-.btn-primary {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: white;
-}
-
-.btn-primary:hover:not(:disabled) {
-    background: var(--primary-dark);
-    border-color: var(--primary-dark);
-}
-
-.btn-danger {
-    background: var(--danger);
-    border-color: var(--danger);
-    color: white;
-}
-
-.btn-danger:hover:not(:disabled) {
-    background: #b91c1c;
-    border-color: #b91c1c;
-}
-
-.btn-link {
-    border: none;
-    background: none;
-    color: var(--primary);
-    padding: 4px 0;
-    font-weight: 600;
-}
-
-.btn-link:hover {
-    text-decoration: underline;
-    background: none;
-}
-
-.back-button {
-    margin-bottom: 16px;
-}
-
-/* Card */
-.card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.card p {
-    margin: 6px 0;
-}
-
-.hash-block {
-    display: block;
-    word-break: break-all;
-    background: #f3f4f6;
-    padding: 10px 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    color: #374151;
-    margin: 8px 0;
-}
-
-/* Table */
-.notaire-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--surface);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-}
-
-.notaire-table th {
-    text-align: left;
-    padding: 12px 16px;
-    background: #f9fafb;
-    color: var(--text-muted);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    border-bottom: 1px solid var(--border);
-}
-
-.notaire-table td {
-    padding: 14px 16px;
-    border-bottom: 1px solid #f3f4f6;
-    font-size: 14px;
-}
-
-.notaire-table tr:last-child td {
-    border-bottom: none;
-}
-
-.actions-cell {
-    display: flex;
-    gap: 8px;
-}
-
-.status-pill {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 999px;
-    background: var(--warning-bg);
-    color: var(--warning-text);
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.status-pill.certifiee {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.status-pill.rejetee {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-.toolbar {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 12px;
-}
-
-.empty-state {
-    text-align: center;
-    color: var(--text-muted);
-    padding: 40px 0;
-}
-
-/* Form */
-.form-field {
-    margin: 16px 0;
-}
-
-.form-field label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.form-field textarea {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 14px;
-    resize: vertical;
-}
-
-.form-field textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--primary-light);
-}
-
-.field-error {
-    color: var(--danger);
-    font-size: 13px;
-    margin: 4px 0 0;
-}
-
-.alert {
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    margin-bottom: 12px;
-}
-
-.alert-error {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-.alert-success {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.actions-row {
-    display: flex;
-    gap: 10px;
-}
-
-/* Timeline (Archive) */
-.timeline {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.timeline-item {
-    position: relative;
-    background: var(--surface);
-    border-left: 3px solid var(--primary);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    box-shadow: var(--shadow);
-    padding: 14px 18px;
-    margin-bottom: 14px;
-}
-
-.timeline-item.latest {
-    border-left-color: var(--success);
-    background: #f0fdf4;
-}
-
-.timeline-item p {
-    margin: 3px 0;
-    font-size: 14px;
-}
-
-.timeline-item code {
-    font-size: 12px;
-    color: var(--text-muted);
+@media (max-width: 640px) {
+    .nt-header { padding: 0 16px; }
+    .nt-main { padding: 20px 16px; }
 }

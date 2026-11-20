@@ -4,6 +4,9 @@ node_modules/
 # Fichier de variables d'environnement locales (contient vos mots de passe secrets)
 .env
 
+# Documents déposés par les promoteurs (fichiers utilisateurs, pas du code)
+backend/uploads/
+
 # Fichiers de logs et temporaires
 npm-debug.log*
 yarn-debug.log*
