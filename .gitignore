@@ -13,7 +13,14 @@ yarn-debug.log*
 yarn-error.log*
 .DS_Store
 # Réseau Fabric — matériel cryptographique et données générées (jamais versionnés)
-blockchain/fabric-network/test-network/organizations/
+blockchain/fabric-network/test-network/organizations/peerOrganizations/
+blockchain/fabric-network/test-network/organizations/ordererOrganizations/
+blockchain/fabric-network/test-network/organizations/fabric-ca/*/msp/
+blockchain/fabric-network/test-network/organizations/fabric-ca/*/tls-cert.pem
+blockchain/fabric-network/test-network/organizations/fabric-ca/*/ca-cert.pem
+blockchain/fabric-network/test-network/organizations/fabric-ca/*/IssuerPublicKey
+blockchain/fabric-network/test-network/organizations/fabric-ca/*/IssuerRevocationPublicKey
+blockchain/fabric-network/test-network/organizations/fabric-ca/*/fabric-ca-server.db
 blockchain/fabric-network/test-network/channel-artifacts/
 blockchain/fabric-network/test-network/system-genesis-block/
 blockchain/fabric-network/test-network/*.tar.gz
