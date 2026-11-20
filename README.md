@@ -161,7 +161,7 @@ _(certification finale, historique des transactions blockchain, vérification d'
 
 ## 🎥 Vidéo de démonstration
 
-▶️ **[Voir la démo complète du workflow (Soumission → Validation → Certification)](LIEN_YOUTUBE_OU_LOOM_ICI)**
+▶️ **[Voir la démo complète du workflow (Soumission → Validation → Certification)](https://youtu.be/aR6Rf2Mb618)**
 
 ---
 
